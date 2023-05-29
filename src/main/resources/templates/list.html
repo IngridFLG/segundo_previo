@@ -48,7 +48,7 @@
             <td th:text="${seleccion.grupo}"></td>
             <td th:text="${seleccion.continente.nombre}"></td>
             <td>
-                <a th:href="@{/Selecciones/registrar(id=${seleccion.id})}" class="btn-edit">Editar</a>
+                <a th:href="@{/Selecciones/editar(id=${seleccion.id})}" class="btn-edit">Editar</a>
                 <a th:href="@{/Selecciones/eliminar(id=${seleccion.id})}" class="btn-delete">Eliminar</a>
             </td>
         </tr>

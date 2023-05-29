@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -59,5 +56,33 @@ public class SeleccionController {
 
         return "redirect:/selecciones";
     }
+
+    @GetMapping("/editar")
+    public String editarNews(@RequestParam("id") Integer id, @ModelAttribute("seleccion") @Valid SeleccionEntity seleccion, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "form";
+        }
+        SeleccionEntity seleccionew = seleccionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("seleciion no encontrada con id: " + id));
+        if (seleccionew != null) {
+            seleccionew.setNombre(seleccion.getNombre());
+            seleccionew.setGrupo(seleccion.getGrupo());
+            seleccionew.setContinente(seleccion.getContinente());
+        }
+        return "redirect:/selecciones";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarNews(@PathVariable("id") Integer id, @ModelAttribute("seleccion") @Valid SeleccionEntity seleccion,
+                               BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/selecciones";
+        }
+
+        seleccionRepository.deleteById(id);
+
+        return "redirect:/selecciones";
+    }
+
 
 }

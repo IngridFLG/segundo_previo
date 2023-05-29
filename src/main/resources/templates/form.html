@@ -35,6 +35,7 @@
     <h1 th:if="${seleccion.nombre == null}">Nueva seleccion</h1>
     <!-- Formulario -->
     <form th:action="@{/selecciones/agregar}" th:object="${seleccion}" method="post">
+        <input type="hidden" name="id" th:field="*{id}"/>
         <div class="form-group">
             <label>Nombre:</label>
             <input type="text" th:field="*{nombre}" placeholder="Ingrese el nombre">
