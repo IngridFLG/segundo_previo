@@ -29,22 +29,25 @@
 </nav>
 
 <div class="container">
-    <h1 class="title">Lista de elementos</h1>
+    <h1 class="title">Lista de seleccion</h1>
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>Id</th>
             <th>Nombre</th>
-            <th>Descripción</th>
+            <th>continente</th>
+            <th>grupo</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item, itemStat : ${items}" th:class="${itemStat.even} ? 'even-row' : 'odd-row'">
-            <td th:text="${item.nombre}"></td>
-            <td th:text="${item.descripcion}"></td>
+        <tr th:each="seleccion: ${seleccion}">
+            <td th:text="${seleccion.id}"></td>
+            <td th:text="${seleccion.nombre}"></td>
+            <td th:text="${seleccion.continente.id}"></td>
             <td>
-                <a th:href="@{/categorias_view/registrar(id=${item.id})}" class="btn-edit">Editar</a>
-                <a th:href="@{/categorias_view/eliminar(id=${item.id})}" class="btn-delete">Eliminar</a>
+                <a th:href="@{/Selecciones/registrar(id=${seleccion.id})}" class="btn-edit">Editar</a>
+                <a th:href="@{/Selecciones/eliminar(id=${seleccion.id})}" class="btn-delete">Eliminar</a>
             </td>
         </tr>
         </tbody>
